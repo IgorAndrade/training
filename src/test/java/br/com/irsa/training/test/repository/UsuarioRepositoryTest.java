@@ -18,7 +18,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import br.com.irsa.training.model.Usuario;
-import br.com.irsa.training.repository.UsuarioRepository;
+import br.com.irsa.training.repository.IUsuarioRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring/application-config.xml"})
@@ -28,7 +28,7 @@ import br.com.irsa.training.repository.UsuarioRepository;
 public class UsuarioRepositoryTest {
 
 	@Autowired
-	UsuarioRepository repository;
+	IUsuarioRepository repository;
 	
 	@Before
 	public void dependencyInjectionTest(){
