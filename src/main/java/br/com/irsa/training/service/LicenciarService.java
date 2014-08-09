@@ -9,16 +9,24 @@ import org.springframework.stereotype.Service;
 import br.com.irsa.training.model.Licenca;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.model.Usuario_Licenca;
+import br.com.irsa.training.regradenegocio.GeradorExcecoes;
+import br.com.irsa.training.regradenegocio.RegraNegocioException;
+import br.com.irsa.training.regradenegocio.RegrasNegocio;
 import br.com.irsa.training.repository.IUsuario_LicencaRepository;
 @Service
 public class LicenciarService implements ILicenciarService {
-
+	@Autowired
+	GeradorExcecoes excecoes ; 
 	@Autowired
 	private IUsuario_LicencaRepository repository;
 	
-	@Override
-	public void licenciarUsuario(Usuario usuario, Licenca licenca) {
+	@Override 
+	public void licenciarUsuario(Usuario usuario, Licenca licenca) throws RegraNegocioException {
 
+		if(!licenca.getAtivo()){
+			throw excecoes.getRNException(RegrasNegocio.LicencaInativa, new String[]{licenca.getNome()});
+		}
+		
 		Usuario_Licenca ul = new Usuario_Licenca(usuario, licenca);
 		
 		ul.setDtInicio(buscarDataFinalLicenca(usuario,licenca));
@@ -38,7 +46,6 @@ public class LicenciarService implements ILicenciarService {
 		if(list == null || list.size()==0)
 			return Calendar.getInstance();
 		else{
-			int t = list.get(0).getDtFim().get(Calendar.DAY_OF_MONTH);
 			return (Calendar) list.get(0).getDtFim().clone();
 			
 		}

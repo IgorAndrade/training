@@ -21,12 +21,13 @@ public class CriaUsuarioLicenca {
 
 	public static Licenca criaLicenca() {
 		Licenca licenca = new Licenca();
-
+		licenca.setAtivo(true);
 		return licenca;
 	}
 
 	public static Licenca criaLicencaComDuracao(int dia, int mes, int ano) {
 		Licenca licenca = criaLicenca();
+		licenca.setAtivo(true);
 		licenca.setDuracao(new Duracao(dia, mes, ano));
 		return licenca;
 	}

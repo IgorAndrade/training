@@ -18,14 +18,23 @@ public class Licenca implements Serializable {
 
 	@Id @GeneratedValue
 	private Long id;
+	private String nome;
 	@Embedded 
 	private Duracao duracao;
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	private List<Permissoes> permissoes;
+	private boolean ativo;
 	
 	public Licenca() {
 		this.permissoes =  new ArrayList<Permissoes>();
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	public Long getId() {
@@ -46,6 +55,14 @@ public class Licenca implements Serializable {
 	
 	public void addPermissao(Permissoes permissao){
 		this.permissoes.add(permissao);
+	}
+	
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	public boolean getAtivo(){
+		return this.ativo;
 	}
 	
 }

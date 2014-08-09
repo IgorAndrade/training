@@ -1,6 +1,6 @@
 package br.com.irsa.training.test.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.irsa.training.model.Licenca;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.model.Usuario_Licenca;
+import br.com.irsa.training.regradenegocio.RegraNegocioException;
 import br.com.irsa.training.repository.IUsuario_LicencaRepository;
 import br.com.irsa.training.service.ILicenciarService;
 import br.com.irsa.training.test.factory.CriaUsuarioLicenca;
@@ -47,16 +48,14 @@ public class ILicensiarServiceTest {
 	}
 	
 	@Test
-	public void Criar1Licencatest() {
+	public void Criar1Licencatest() throws RegraNegocioException {
 		// cria resultado esperado
 		Calendar dtInicio = Calendar.getInstance();
-		// dtInicio.set(Calendar.HOUR_OF_DAY, 0);
-		// dtInicio.set(Calendar.MINUTE, 0);
-		// dtInicio.set(Calendar.HOUR_OF_DAY, 0);
+		 
 		Calendar dtFim = Calendar.getInstance();
 		dtFim.add(Calendar.DAY_OF_MONTH, 5);
 		dtFim.add(Calendar.MONTH, 1);
-
+ 
 		// cria cenario
 		Usuario usuario = CriaUsuarioLicenca.criaUsuario();
 		Licenca licenca = CriaUsuarioLicenca.criaLicencaComDuracao(5, 1, 0);
@@ -81,13 +80,13 @@ public class ILicensiarServiceTest {
 		// assertEquals(ulExpected.getDtFim().get(Calendar.DAY_OF_MONTH),
 		// ulCaptor
 		// .getValue().getDtFim().get(Calendar.DAY_OF_MONTH));
-		assertEquals("Teste data inicio:", dtInicio, ulCaptor.getValue()
-				.getDtInicio());
-		assertEquals("Teste data fim:", dtFim, ulCaptor.getValue().getDtFim());
+		assertEquals("Teste data inicio:", removerTempo(dtInicio), removerTempo(ulCaptor.getValue()
+				.getDtInicio()));
+		assertEquals("Teste data fim:", removerTempo(dtFim), removerTempo(ulCaptor.getValue().getDtFim()));
 	}
 
 	@Test
-	public void CriarLicencaAcumuladatest() {
+	public void CriarLicencaAcumuladatest() throws RegraNegocioException {
 		// cria resultado do mock
 		Usuario_Licenca ulExpected = CriaUsuarioLicenca.gerar();
 		ulExpected.setDtInicio(Calendar.getInstance());
@@ -123,11 +122,27 @@ public class ILicensiarServiceTest {
 		Calendar dtFimExpected = Calendar.getInstance();
 		dtFimExpected.add(Calendar.DAY_OF_MONTH, 3 + 5);
 
-		assertEquals("Teste data inicio:",
-				dtInicioExpected.get(Calendar.DAY_OF_MONTH), ulCaptor
-						.getValue().getDtInicio().get(Calendar.DAY_OF_MONTH));
-		// assertEquals("Teste data inicio:",dtInicioExpected,ulCaptor.getValue().getDtInicio());
-		// assertEquals("Teste data fim:",dtFimExpected,ulCaptor.getValue().getDtFim());
+		 assertEquals("Teste data inicio:",removerTempo(dtInicioExpected),removerTempo(ulCaptor.getValue().getDtInicio()));
+		 assertEquals("Teste data fim:",removerTempo(dtFimExpected),removerTempo(ulCaptor.getValue().getDtFim()));
 
+	}
+	
+	@Test(expected=RegraNegocioException.class)
+	public void licencaInatiaTest() throws RegraNegocioException{
+		// cria cenario
+				Usuario usuario = CriaUsuarioLicenca.criaUsuario();
+				Licenca licenca = CriaUsuarioLicenca.criaLicencaComDuracao(5, 0, 0);
+				licenca.setAtivo(false);
+				
+				service.licenciarUsuario(usuario, licenca);
+				fail("Exceção não lançada");
+	}
+	
+	private Calendar removerTempo(Calendar data){
+		data.clear(Calendar.HOUR);
+		data.clear(Calendar.MINUTE);
+		data.clear(Calendar.SECOND);
+		data.clear(Calendar.MILLISECOND);
+		return data;
 	}
 }
