@@ -17,10 +17,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Usuario")
 @Entity
-@NamedQueries({ 
-@NamedQuery(name="Usuario.buscarPEmail", query="select user from Usuario user where user.email = :email"),
-@NamedQuery(name="Usuario.Todos", query="select user from Usuario user")
-})
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

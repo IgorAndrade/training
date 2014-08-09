@@ -11,7 +11,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
-@NamedQuery(name="buscaPersonal", query="select personal from PersonalProfile personal where personal.professor = :professor")
 public class PersonalProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
