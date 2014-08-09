@@ -1,6 +1,6 @@
 package br.com.irsa.training.test.regradenegocio;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import br.com.irsa.training.regradenegocio.GeradorExcecoes;
 import br.com.irsa.training.regradenegocio.RegraNegocioException;
 import br.com.irsa.training.regradenegocio.RegrasNegocio;
 
@@ -18,13 +19,13 @@ import br.com.irsa.training.regradenegocio.RegrasNegocio;
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
 public class RegraNegocioExceptionTest {
 	@Autowired
-	private RegraNegocioException rn;
+	private GeradorExcecoes rn;
 
 	@Test
 	public void testRNSemParametro() {
 		try {
-			rn.setRegra(RegrasNegocio.CadastroRepetido);
-			throw rn;
+			
+			throw rn.getRNException(RegrasNegocio.CadastroRepetido, null);
 		} catch (RegraNegocioException rnE) {
 			assertEquals("Cadastro Repetido!", rnE.getMessage());
 		}
@@ -33,10 +34,7 @@ public class RegraNegocioExceptionTest {
 	@Test
 	public void testRNComParametro() {
 		try {
-			String[] msg = { "Igor" };
-			rn.setRegra(RegrasNegocio.UsuarioRepetido);
-			rn.setParam(msg);
-			throw rn;
+			throw rn.getRNException(RegrasNegocio.UsuarioRepetido, new String[]{"Igor"});
 		} catch (RegraNegocioException rnE) {
 			assertEquals("Usuário Igor já existe!", rnE.getMessage());
 		}

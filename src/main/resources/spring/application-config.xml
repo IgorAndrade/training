@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	 xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
-<!-- 		xmlns:tx="http://www.springframework.org/schema/tx" -->
-<!--     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd -->
-    <!-- Uncomment and add your base-package here: -->
-         <context:component-scan base-package="br.com.irsa.training" />
-         
-         <bean id="entityManagerFactory"
+	<!-- xmlns:tx="http://www.springframework.org/schema/tx" -->
+	<!-- http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd -->
+	<!-- Uncomment and add your base-package here: -->
+	<context:component-scan base-package="br.com.irsa.training" />
+
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
@@ -22,18 +22,17 @@
 				<property name="generateDdl" value="true" />
 			</bean>
 		</property>
-<!-- 		<property name="persistenceUnitName" value="persistenceUnitName" /> -->
+		<!-- <property name="persistenceUnitName" value="persistenceUnitName" /> -->
 		<property name="packagesToScan" value="br.com.irsa.training.model" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" 
-         ref="entityManagerFactory"/>
-        <property name="jpaDialect">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-        </property>
-    </bean>
-<!-- 	<tx:annotation-driven transaction-manager="transactionManager"/> -->
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+	</bean>
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -42,17 +41,17 @@
 		<property name="username" value="root" />
 		<property name="password" value="senhasql" />
 	</bean>
-	
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="basenames">
 			<list>
-			<value>/WEB-INF/msgs.properties</value>
-<!-- 				<value>classpath:msgs.properties</value> -->
+				<!-- <value>/WEB-INF/msgs.properties</value> -->
+				<value>classpath:msgs</value>
 			</list>
 		</property>
 	</bean>
-	
-	 <jpa:repositories base-package="br.com.irsa.training.repository"/>
+
+	<jpa:repositories base-package="br.com.irsa.training.repository" />
 </beans>
