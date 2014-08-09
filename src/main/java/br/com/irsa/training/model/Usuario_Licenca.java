@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Usuario_Licensa  implements Serializable{
+public class Usuario_Licenca  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private Long id;
@@ -23,11 +23,11 @@ public class Usuario_Licensa  implements Serializable{
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	private Licensa licensa;
+	private Licenca licenca;
 	
-	public Usuario_Licensa(Usuario usuario, Licensa licensa) {
+	public Usuario_Licenca(Usuario usuario, Licenca licenca) {
 		this.usuario = usuario;
-		this.licensa = licensa;
+		this.licenca = licenca;
 	}
 
 	public Usuario getUsuario() {
@@ -38,12 +38,12 @@ public class Usuario_Licensa  implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public Licensa getLicensa() {
-		return licensa;
+	public Licenca getLicenca() {
+		return licenca;
 	}
 
-	public void setLicensa(Licensa licensa) {
-		this.licensa = licensa;
+	public void setLicenca(Licenca licenca) {
+		this.licenca = licenca;
 	}
 
 	public Calendar getDtInicio() {

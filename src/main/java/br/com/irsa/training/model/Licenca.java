@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Licensa implements Serializable {
+public class Licenca implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue
@@ -24,7 +24,7 @@ public class Licensa implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private List<Permissoes> permissoes;
 	
-	public Licensa() {
+	public Licenca() {
 		this.permissoes =  new ArrayList<Permissoes>();
 	}
 	
