@@ -7,7 +7,9 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegraNegocioException extends Exception {
 
 	private static final long serialVersionUID = 1L;
@@ -18,8 +20,7 @@ public class RegraNegocioException extends Exception {
 	private MessageSource msg;
 	private String[] param;
 	
-	public RegraNegocioException(String msg) {
-		super(msg);
+	public RegraNegocioException() {
 	}
 	
 	public RegraNegocioException(RegrasNegocio regra) {
@@ -42,4 +43,17 @@ public class RegraNegocioException extends Exception {
 		return msg.getMessage(prefixo+regra.name(), param, null);
 	}
 
+	public RegrasNegocio getRegra() {
+		return regra;
+	}
+
+	public void setRegra(RegrasNegocio regra) {
+		this.regra = regra;
+	}
+
+	public void setParam(String[] param) {
+		this.param = param;
+	}
+
+	
 }

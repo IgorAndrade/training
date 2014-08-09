@@ -43,5 +43,16 @@
 		<property name="password" value="senhasql" />
 	</bean>
 	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+			<value>/WEB-INF/msgs.properties</value>
+<!-- 				<value>classpath:msgs.properties</value> -->
+			</list>
+		</property>
+	</bean>
+	
 	 <jpa:repositories base-package="br.com.irsa.training.repository"/>
 </beans>
