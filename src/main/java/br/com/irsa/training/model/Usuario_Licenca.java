@@ -25,11 +25,17 @@ public class Usuario_Licenca  implements Serializable{
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Licenca licenca;
 	
+	public Usuario_Licenca() {	}
+	
 	public Usuario_Licenca(Usuario usuario, Licenca licenca) {
 		this.usuario = usuario;
 		this.licenca = licenca;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

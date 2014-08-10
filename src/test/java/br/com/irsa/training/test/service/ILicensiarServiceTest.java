@@ -65,7 +65,7 @@ public class ILicensiarServiceTest {
 				repositoryMock
 						.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(
 								any(Usuario.class), any(Licenca.class),
-								any(Date.class))).thenReturn(null);
+								any(Calendar.class))).thenReturn(null);
 		ArgumentCaptor<Usuario_Licenca> ulCaptor = ArgumentCaptor
 				.forClass(Usuario_Licenca.class);
 
@@ -105,7 +105,7 @@ public class ILicensiarServiceTest {
 				repositoryMock
 						.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(
 								any(Usuario.class), any(Licenca.class),
-								any(Date.class))).thenReturn(listRetorno);
+								any(Calendar.class))).thenReturn(listRetorno);
 
 		ArgumentCaptor<Usuario_Licenca> ulCaptor = ArgumentCaptor
 				.forClass(Usuario_Licenca.class);

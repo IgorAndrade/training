@@ -42,7 +42,7 @@ public class LicenciarService implements ILicenciarService {
 	}
 	
 	public Calendar buscarDataFinalLicenca(Usuario usuario, Licenca licenca){
-		List<Usuario_Licenca> list = repository.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(usuario, licenca, Calendar.getInstance().getTime());
+		List<Usuario_Licenca> list = repository.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(usuario, licenca, Calendar.getInstance());
 		if(list == null || list.size()==0)
 			return Calendar.getInstance();
 		else{

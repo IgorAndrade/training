@@ -65,4 +65,8 @@ public class Licenca implements Serializable {
 		return this.ativo;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return this.id.equals(((Licenca) obj).getId());
+	}
 }
