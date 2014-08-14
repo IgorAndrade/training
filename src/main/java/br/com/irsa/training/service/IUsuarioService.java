@@ -7,4 +7,5 @@ public interface IUsuarioService {
 
 	public void salvar(Usuario user) throws Exception;
 	public void setRepository(IUsuarioRepository repository);
+	public Usuario buscarPorID(Long id);
 }

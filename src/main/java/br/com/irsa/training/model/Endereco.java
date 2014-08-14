@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@XmlRootElement(name="end")
+@XmlRootElement(name="Endereco")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -18,4 +18,14 @@ public class homeController {
 			return usuario;
 		}
 		
+		@RequestMapping(value="/",produces={"application/json"},method=RequestMethod.GET)
+		public Usuario ret(){
+			Usuario usuario = new Usuario();
+			usuario.setNome("igor");
+			usuario.setEmail("fsdfsf");
+			return usuario;
+		}
+		
+		
+		
 }

@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 
 
 @Entity
+@XmlRootElement(name="Telefone")
 public class Telefone implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,6 +22,7 @@ public class Telefone implements Serializable {
 	private TelefoneTipos tipo;
 	private String telefone;
 	@ManyToOne
+	@XmlTransient
 	private Usuario user;
  
 	public TelefoneTipos getTipo() {
@@ -44,7 +49,7 @@ public class Telefone implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
+	@XmlTransient
 	public Usuario getUser() {
 		return user;
 	}
