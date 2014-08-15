@@ -44,8 +44,9 @@ public class UsuarioController {
 	
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	public Usuario getUser(@PathVariable("id") Long id){
-		 
-		return  service.buscarPorID(id);
+		  Usuario usuario = service.buscarPorID(id);
+		  
+		  return  usuario;
 	}
 	  @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET, produces = "application/json")
 	  public ModelAndView editarUser(@PathVariable("id") Long id){

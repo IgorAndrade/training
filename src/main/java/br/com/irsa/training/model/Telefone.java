@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
@@ -21,8 +23,9 @@ public class Telefone implements Serializable {
 	private Long id;
 	private TelefoneTipos tipo;
 	private String telefone;
+	
 	@ManyToOne
-	@XmlTransient
+	@JsonIgnore
 	private Usuario user;
  
 	public TelefoneTipos getTipo() {
@@ -40,8 +43,7 @@ public class Telefone implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-
+	@JsonIgnore
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
@@ -49,7 +51,8 @@ public class Telefone implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	@XmlTransient
+	
+	@JsonProperty
 	public Usuario getUser() {
 		return user;
 	}
