@@ -19,8 +19,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @RestController
 @RequestMapping("/user")
 public class UsuarioController {
-	@Autowired
-	ObjectMapper mapper;
 	
 	@Autowired
 	ILicencaRepository r;
@@ -49,10 +47,9 @@ public class UsuarioController {
 	}
 	
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-	public String getUser(@PathVariable("id") Long id) throws JsonProcessingException{
+	public Usuario getUser(@PathVariable("id") Long id) throws JsonProcessingException{
 		  Usuario usuario = service.buscarPorID(id);
-		  String usuarioJsonString = mapper.writeValueAsString(usuario);
-		  return  usuarioJsonString;
+		  return usuario;
 	}
 	  @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET, produces = "application/json")
 	  public ModelAndView editarUser(@PathVariable("id") Long id){

@@ -2,8 +2,7 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:repository="http://www.springframework.org/schema/data/repository"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -23,32 +22,37 @@
 	</bean>
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
-	<bean id="contentNegotiationManager"
-		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-		<property name="favorPathExtension" value="false" />
-		<property name="favorParameter" value="true" />
-		<property name="parameterName" value="mediaType" />
-		<property name="ignoreAcceptHeader" value="true" />
-		<property name="useJaf" value="false" />
-		<property name="defaultContentType" value="application/json" />
+	<!-- <bean id="contentNegotiationManager" -->
+	<!-- class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"> -->
+	<!-- <property name="favorPathExtension" value="false" /> -->
+	<!-- <property name="favorParameter" value="true" /> -->
+	<!-- <property name="parameterName" value="mediaType" /> -->
+	<!-- <property name="ignoreAcceptHeader" value="true" /> -->
+	<!-- <property name="useJaf" value="false" /> -->
+	<!-- <property name="defaultContentType" value="application/json" /> -->
 
-		<property name="mediaTypes">
-			<map>
-				<entry key="json" value="application/json" />
-				<entry key="xml" value="application/xml" />
-			</map>
+	<!-- <property name="mediaTypes"> -->
+	<!-- <map> -->
+	<!-- <entry key="json" value="application/json" /> -->
+	<!-- <entry key="xml" value="application/xml" /> -->
+	<!-- </map> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+			</list>
 		</property>
 	</bean>
- <!-- Configure to plugin JSON as request and response in method handler -->
-<!--     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> -->
-<!--         <property name="messageConverters"> -->
-<!--             <list> -->
-<!--                 <ref bean="jsonMessageConverter"/> -->
-<!--             </list> -->
-<!--         </property> -->
-<!--     </bean> -->
-     
-<!--     Configure bean to convert JSON to POJO and vice versa -->
-<!--     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
-<!--     </bean>  -->
+
+<!-- 	Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper">
+			<ref bean="ObjectMapperCustom" />
+		</property>
+	</bean>
 </beans>

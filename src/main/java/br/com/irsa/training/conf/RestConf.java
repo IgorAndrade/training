@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @Configuration
 public class RestConf {
 
-	@Bean
+	@Bean(name="ObjectMapperCustom")
 	public ObjectMapper getMapper(){
 		ObjectMapper mapper = new ObjectMapper();
 		  mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
