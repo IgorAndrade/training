@@ -12,9 +12,15 @@ import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.repository.ILicencaRepository;
 import br.com.irsa.training.service.IUsuarioService;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 @RestController
 @RequestMapping("/user")
 public class UsuarioController {
+	@Autowired
+	ObjectMapper mapper;
 	
 	@Autowired
 	ILicencaRepository r;
@@ -43,10 +49,10 @@ public class UsuarioController {
 	}
 	
 	  @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-	public Usuario getUser(@PathVariable("id") Long id){
+	public String getUser(@PathVariable("id") Long id) throws JsonProcessingException{
 		  Usuario usuario = service.buscarPorID(id);
-		  
-		  return  usuario;
+		  String usuarioJsonString = mapper.writeValueAsString(usuario);
+		  return  usuarioJsonString;
 	}
 	  @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET, produces = "application/json")
 	  public ModelAndView editarUser(@PathVariable("id") Long id){

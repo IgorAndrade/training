@@ -30,8 +30,8 @@ public class UsuarioService implements IUsuarioService {
 	
 	@Override
 	public Usuario buscarPorID(Long id) {
-	
-		return repository.getOne(id);
+		Usuario usuario = repository.getOne(id);
+		return usuario;
 	}
 
 }

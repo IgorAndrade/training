@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
-@XmlRootElement(name="Telefone")
 public class Telefone implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +24,6 @@ public class Telefone implements Serializable {
 	private String telefone;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Usuario user;
  
 	public TelefoneTipos getTipo() {
@@ -43,7 +41,6 @@ public class Telefone implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	@JsonIgnore
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
@@ -52,7 +49,7 @@ public class Telefone implements Serializable {
 		return id;
 	}
 	
-	@JsonProperty
+	@JsonIgnore
 	public Usuario getUser() {
 		return user;
 	}
