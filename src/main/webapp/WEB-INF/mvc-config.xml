@@ -17,12 +17,14 @@
 	<context:component-scan base-package="br.com.irsa.training" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="br.com.irsa.training.conf.JstlView" />
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 	<mvc:resources location="/resources/js/" mapping="/js/**" />
 	<mvc:resources location="/resources/css/" mapping="/css/**" />
+	<mvc:resources location="/resources/images/" mapping="/img/**" />
 
 	<!-- <bean id="contentNegotiationManager" -->
 	<!-- class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"> -->

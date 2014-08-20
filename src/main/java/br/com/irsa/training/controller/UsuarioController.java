@@ -28,7 +28,7 @@ public class UsuarioController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView novo(){
-		ModelAndView mv = new ModelAndView("user");
+		ModelAndView mv = new ModelAndView("user/user");
 		Usuario usuario = new Usuario();
 		usuario.setNome("novo");
 		mv.addObject("user", usuario);
