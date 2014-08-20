@@ -21,6 +21,8 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/resources/js/" mapping="/js/**" />
+	<mvc:resources location="/resources/css/" mapping="/css/**" />
 
 	<!-- <bean id="contentNegotiationManager" -->
 	<!-- class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"> -->

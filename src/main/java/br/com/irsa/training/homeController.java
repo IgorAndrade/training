@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.irsa.training.model.Usuario;
 
@@ -26,6 +27,15 @@ public class homeController {
 			return usuario;
 		}
 		
+		
+		@RequestMapping(value="/tables",method=RequestMethod.GET)
+		public ModelAndView table(){
+			return new ModelAndView("tables");
+		}
+		@RequestMapping(value="/forms",method=RequestMethod.GET)
+		public ModelAndView forms(){
+			return new ModelAndView("forms");
+		}
 		
 		
 }
