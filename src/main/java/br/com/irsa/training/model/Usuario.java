@@ -21,6 +21,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue
+	private StatusUser status;
 	private Long id;
 	private String nome;	
 	private String email;
@@ -72,5 +73,13 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return this.nome;
+	}
+	
+	public void setStatus(StatusUser status) {
+		this.status = status;
+	}
+	
+	public StatusUser getStatus() {
+		return status;
 	}
 }

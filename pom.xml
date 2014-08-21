@@ -21,7 +21,7 @@
 
 		<!-- Spring -->
 		<spring-framework.version>4.0.4.RELEASE</spring-framework.version>
-
+		<spring-secutity>3.2.5.RELEASE</spring-secutity>
 		<!-- Hibernate / JPA -->
 		<!-- <hibernate.version>4.2.1.Final</hibernate.version> -->
 
@@ -74,6 +74,24 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
+		<!-- Spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-secutity}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-secutity}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-secutity}</version>
+		</dependency>
+
+
 
 		<!-- Logging with SLF4J & LogBack -->
 		<dependency>
