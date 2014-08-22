@@ -74,5 +74,10 @@ public class IUsuarioServiceTest {
 			service.salvar(null);
 			fail("Não lancou excep");
 	}
+	
+	@Test
+	public void testLisatPermissoes(){
+		
+	}
 
 }

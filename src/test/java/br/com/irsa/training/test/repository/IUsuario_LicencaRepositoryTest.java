@@ -1,13 +1,15 @@
 package br.com.irsa.training.test.repository;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
+
 import static org.hamcrest.CoreMatchers.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,4 +75,13 @@ public class IUsuario_LicencaRepositoryTest {
 		
 	}
 
+	@Test 
+	public  void testListarPermissoes(){
+		Usuario usuario = userRepository.getOne(Long.valueOf(2));
+		List<String> permissoes = ULRepository.getAllPermissoes(usuario, Calendar.getInstance());
+		
+		String[] expected = {"per 1","per 2"};
+		
+		assertThat("Lista diferente da esperada", permissoes, is(Arrays.asList(expected)));
+	}
 }

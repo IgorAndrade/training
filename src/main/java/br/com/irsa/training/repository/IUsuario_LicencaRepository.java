@@ -1,7 +1,6 @@
 package br.com.irsa.training.repository;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,5 +20,7 @@ public interface IUsuario_LicencaRepository extends JpaRepository<Usuario_Licenc
 	List<Usuario> findUsuariosLicensiados(@Param("licenca") Licenca licenca);
 	@Query("select ul.licenca from Usuario_Licenca ul where ul.usuario = :usuario")
 	List<Licenca> findLicencasDoUsuario(@Param("usuario") Usuario usuario);
+	@Query("select p from Usuario_Licenca  ul join ul.licenca l join l.permissoes p where ul.usuario = :usuario and ul.dtFim >= :data group by p ")
+	List<String> getAllPermissoes(@Param("usuario") Usuario usuario,@Param("data") Calendar data);
 	
 }

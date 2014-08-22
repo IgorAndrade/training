@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,8 +24,10 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue
-	private StatusUser status;
 	private Long id;
+	@Enumerated(EnumType.STRING)
+	@JsonIgnore
+	private StatusUser status;
 	private String nome;	
 	private String email;
 	@OneToOne(cascade = CascadeType.ALL)

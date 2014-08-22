@@ -55,5 +55,6 @@ public class LicenciarService implements ILicenciarService {
 	public void setRepository(IUsuario_LicencaRepository repository) {
 		this.repository = repository;
 	}
+	
 
 }
