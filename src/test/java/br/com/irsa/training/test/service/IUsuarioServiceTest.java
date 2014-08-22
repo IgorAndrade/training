@@ -24,7 +24,7 @@ import br.com.irsa.training.service.IUsuarioService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/application-config.xml" })
+@ContextConfiguration(locations = { "classpath:spring/application-security.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
