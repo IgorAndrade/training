@@ -1,4 +1,4 @@
-package br.com.irsa.training;
+package br.com.irsa.training.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

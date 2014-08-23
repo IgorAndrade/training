@@ -23,28 +23,26 @@ public class Autenticador implements AuthenticationProvider {
 
 	@Autowired
 	private IUsuarioService userService;
-	@Autowired
-	@Qualifier("LoginService")
-	private ILoginService loginService;
-	
-	
 	
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
 		
 		 String login = (String) authentication.getPrincipal();
-		 Login loginExistente = loginService.getByLogin(login);
-		 if(loginExistente == null){
+		 String senha = (String) authentication.getCredentials();
+		 
+		 Usuario usuario = userService.getUserbyLogin(login,senha);
+		 
+		 if(usuario == null){
 			 throw new AuthenticationCredentialsNotFoundException("Usuario ou Senha invalido!");
 		 }
-		 Usuario usuario = userService.buscarPorID(loginExistente.getId());
+		 
 		 List<String> allPermissoes = userService.gelAllPermissoes(usuario);
 		
-		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginExistente.getLogin(),loginExistente.getSenha(), GeradorAuthority.gerar(allPermissoes));
+		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login,senha, GeradorAuthority.gerar(allPermissoes));
 		 
-		
 		return token;
+		
 	}
 
 	@Override
