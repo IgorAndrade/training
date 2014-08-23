@@ -11,13 +11,14 @@
         <session-management invalid-session-url="/login/invalidSession">
             <concurrency-control max-sessions="1" expired-url="/login/expired" />
         </session-management>
-
-        <form-login login-page="/login" login-processing-url="/logar" default-target-url="/home" always-use-default-target="true" authentication-failure-url="/login/erro" username-parameter="login" password-parameter="senha" />
+<!-- login-page="/login"  -->
+        <form-login login-processing-url="/logar" default-target-url="/home" always-use-default-target="true" authentication-failure-url="/login/erro" username-parameter="login" password-parameter="senha" />
  
         <logout logout-url="/logout" logout-success-url="/login/logut"   delete-cookies="JSESSIONID"  invalidate-session="true" />
  
         <intercept-url requires-channel="http" pattern="/resources/*" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/login*" access="permitAll()" />
+        <intercept-url requires-channel="http" pattern="/tabtest" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/**" access="hasRole('ROLE_USER')" />
         <intercept-url requires-channel="http" pattern="/adm/*" access="hasRole('ROLE_ADM')" />
     </http>

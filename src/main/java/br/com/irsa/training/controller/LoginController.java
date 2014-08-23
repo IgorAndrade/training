@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.irsa.training.enums.TypeMsg;
+
 @Controller("LoginController")
 @RequestMapping("/login")
 public class LoginController {
@@ -22,7 +24,13 @@ public class LoginController {
 	@RequestMapping("/invalidSession")
 	public  ModelAndView invalidSession(){
 		ModelAndView modelAndView = new ModelAndView("login/login");
-		modelAndView.addObject("error",msg.getMessage("erro.login.invalidSession",null,null));
+		modelAndView.addObject(TypeMsg.ERROR.name(),msg.getMessage("erro.login.invalidSession",null,null));
+		return modelAndView;
+	}
+	@RequestMapping("/accessDenied")
+	public  ModelAndView accessDenied(){
+		ModelAndView modelAndView = new ModelAndView("login/login");
+		modelAndView.addObject(TypeMsg.ERROR.name(),msg.getMessage("erro.login.accessDenied",null,null));
 		return modelAndView;
 	}
 	
@@ -30,14 +38,14 @@ public class LoginController {
 	@RequestMapping("/expired")
 	public  ModelAndView expired(){
 		ModelAndView modelAndView = new ModelAndView("login/login");
-		modelAndView.addObject("error",msg.getMessage("erro.login.expired",null,null));
+		modelAndView.addObject(TypeMsg.ERROR.name(),msg.getMessage("erro.login.expired",null,null));
 		return modelAndView;
 	}
 	
 	@RequestMapping("/logout")
 	public  ModelAndView logout(){
 		ModelAndView modelAndView = new ModelAndView("login/login");
-		modelAndView.addObject("info",msg.getMessage("info.login.logoutSucess",null,null));
+		modelAndView.addObject(TypeMsg.SUCCESS.name(),msg.getMessage("info.login.logoutSuccess",null,null));
 		return modelAndView;
 	}
 	

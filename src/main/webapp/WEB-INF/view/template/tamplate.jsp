@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@page import="br.com.irsa.training.enums.TypeMsg"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<%@ page isELIgnored="false" %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +40,17 @@
 		<jsp:include page="header.jsp" />
 		<div id="page-wrapper">
 			<div class="container-fluid">
+<%-- 				<c:if test="${not empty SUCCESS}"> --%>
+					<div class="alert alert-success">
+						<strong><s:message code="success.titulo" /></strong><c:out value="${msgss}"/>  
+					</div>
+<%-- 				</c:if> --%>
+				<c:if test="${not empty ERROR}">
+					<div class="alert alert-danger">
+						<strong><s:message code="erro.titulo" /></strong> ${ERROR}
+					</div>
+				</c:if>
+
 				<jsp:include page="${body}" />
 			</div>
 			<!-- /.container-fluid -->
@@ -46,7 +59,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-	
+
 	<!-- jQuery Version 1.11.0 -->
 	<script src="js/jquery-1.11.0.js"></script>
 
