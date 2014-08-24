@@ -24,6 +24,9 @@ public class Autenticador implements AuthenticationProvider {
 	@Autowired
 	private IUsuarioService userService;
 	
+	@Autowired @Qualifier("userLogado")
+	private UsuarioLogado usuarioLogado;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
@@ -39,6 +42,9 @@ public class Autenticador implements AuthenticationProvider {
 		 
 		 List<String> allPermissoes = userService.gelAllPermissoes(usuario);
 		
+		 this.usuarioLogado.setUser(usuario);
+		 this.usuarioLogado.setAllPermissoes(allPermissoes);
+		 
 		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login,senha, GeradorAuthority.gerar(allPermissoes));
 		 
 		return token;

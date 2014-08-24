@@ -21,6 +21,13 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<bean class="org.springframework.web.context.support.ServletContextAttributeExporter">
+    <property name="attributes">
+        <map>
+            <entry key="userLogado" value-ref="userLogado"/>
+        </map>
+    </property>
+</bean>
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 	<mvc:resources location="/resources/js/" mapping="/js/**" />
 	<mvc:resources location="/resources/css/" mapping="/css/**" />

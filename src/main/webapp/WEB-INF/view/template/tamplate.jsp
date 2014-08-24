@@ -42,7 +42,7 @@
 			<div class="container-fluid">
 				<c:if test="${not empty SUCCESS}">
 					<div class="alert alert-success">
-						<strong><s:message code="success.titulo" /></strong><c:out value="${SUCCESS}"/> 
+						<strong><s:message code="success.titulo" /></strong> <c:out value="${SUCCESS}"/> 
 					</div>
 				</c:if>
 				<c:if test="${not empty ERROR}">

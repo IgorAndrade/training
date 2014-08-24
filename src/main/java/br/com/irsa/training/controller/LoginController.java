@@ -29,10 +29,10 @@ public class LoginController {
 		modelAndView.addObject("ERROR",msg.getMessage("erro.login.errologin",null,null));
 		return modelAndView;
 	}
-	@RequestMapping("/logar")
-	public  String logar(){
-		return "home";
-	}
+//	@RequestMapping("/logar")
+//	public  String logar(){
+//		return "home";
+//	}
 	
 	@RequestMapping("/invalidSession")
 	public  ModelAndView invalidSession(){

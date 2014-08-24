@@ -9,6 +9,6 @@
 <title>teste</title>
 </head>
 <body>
- teste 
+ nome: ${userLogado.nome }
 </body>
 </html>
