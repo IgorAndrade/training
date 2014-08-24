@@ -18,7 +18,20 @@ public class LoginController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView loginPage(){
+		System.out.println("login");
 		return new ModelAndView("login/login");
+		
+	}
+	
+	@RequestMapping("/erro")
+	public  ModelAndView erro(){
+		ModelAndView modelAndView = new ModelAndView("login/login");
+		modelAndView.addObject("ERROR",msg.getMessage("erro.login.errologin",null,null));
+		return modelAndView;
+	}
+	@RequestMapping("/logar")
+	public  String logar(){
+		return "home";
 	}
 	
 	@RequestMapping("/invalidSession")

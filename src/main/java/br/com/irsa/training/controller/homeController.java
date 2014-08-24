@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.irsa.training.enums.TypeMsg;
 import br.com.irsa.training.model.Usuario;
 
-@RestController
+@Controller
 public class homeController {
 
 	@Autowired
@@ -20,8 +20,7 @@ public class homeController {
 	@RequestMapping(value = "/home", produces = { "application/json" }, method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject(TypeMsg.SUCCESS.name(),
-				msg.getMessage("info.login.logoutSuccess", null, null));
+		
 		return mv;
 	}
 

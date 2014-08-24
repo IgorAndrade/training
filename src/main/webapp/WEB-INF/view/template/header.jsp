@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,33 +81,30 @@
 				data-toggle="dropdown"><i class="fa fa-bell"></i> <b
 					class="caret"></b></a>
 				<ul class="dropdown-menu alert-dropdown">
-					<li><a href="#">Alert Name <span
-							class="label label-default">Alert Badge</span></a></li>
-					<li><a href="#">Alert Name <span
-							class="label label-primary">Alert Badge</span></a></li>
-					<li><a href="#">Alert Name <span
-							class="label label-success">Alert Badge</span></a></li>
-					<li><a href="#">Alert Name <span class="label label-info">Alert
-								Badge</span></a></li>
-					<li><a href="#">Alert Name <span
-							class="label label-warning">Alert Badge</span></a></li>
-					<li><a href="#">Alert Name <span
-							class="label label-danger">Alert Badge</span></a></li>
-					<li class="divider"></li>
-					<li><a href="#">View All</a></li>
+<%-- 					<li><a href="#">Alert Name <span --%>
+<%-- 							class="label label-default">Alert Badge</span></a></li> --%>
+<%-- 					<li><a href="#">Alert Name <span --%>
+<%-- 							class="label label-primary">Alert Badge</span></a></li> --%>
+<%-- 					<li><a href="#">Alert Name <span --%>
+<%-- 							class="label label-success">Alert Badge</span></a></li> --%>
+<%-- 					<li><a href="#">Alert Name <span class="label label-info">Alert --%>
+<%-- 								Badge</span></a></li> --%>
+<%-- 					<li><a href="#">Alert Name <span --%>
+<%-- 							class="label label-warning">Alert Badge</span></a></li> --%>
+<%-- 					<li><a href="#">Alert Name <span --%>
+<%-- 							class="label label-danger">Alert Badge</span></a></li> --%>
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li><a href="#">View All</a></li> -->
 				</ul></li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+				data-toggle="dropdown"><i class="fa fa-user"></i> nome <b
 					class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-					<li><a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-					</li>
-					<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-					</li>
+					<li><a href="#"><i class="fa fa-fw fa-user"></i> <s:message code="menu.profile"/></a></li>
+<!-- 					<li><a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>		</li> -->
+<!-- 					<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li> -->
 					<li class="divider"></li>
-					<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log
-							Out</a></li>
+					<li><a href='<s:url value="/logout"></s:url>'><i class="fa fa-fw fa-power-off"></i> <s:message code="menu.sair" /></a></li>
 				</ul></li>
 		</ul>
 		<jsp:include page="menu.jsp"/>

@@ -18,13 +18,13 @@
 <title><s:message code="sistema.titulo" /></title>
 
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="<s:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="css/sb-admin.css" rel="stylesheet">
+<link href="<s:url value="/css/sb-admin.css"/>" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="resources/font-awesome-4.1.0/css/font-awesome.min.css"
+<link href="<s:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>"
 	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,14 +40,14 @@
 		<jsp:include page="header.jsp" />
 		<div id="page-wrapper">
 			<div class="container-fluid">
-<%-- 				<c:if test="${not empty SUCCESS}"> --%>
+				<c:if test="${not empty SUCCESS}">
 					<div class="alert alert-success">
-						<strong><s:message code="success.titulo" /></strong><c:out value="${msgss}"/>  
+						<strong><s:message code="success.titulo" /></strong><c:out value="${SUCCESS}"/> 
 					</div>
-<%-- 				</c:if> --%>
+				</c:if>
 				<c:if test="${not empty ERROR}">
 					<div class="alert alert-danger">
-						<strong><s:message code="erro.titulo" /></strong> ${ERROR}
+						<strong><s:message code="erro.titulo" /></strong> <c:out value="${ERROR}"/>
 					</div>
 				</c:if>
 
@@ -61,9 +61,9 @@
 	<!-- /#wrapper -->
 
 	<!-- jQuery Version 1.11.0 -->
-	<script src="js/jquery-1.11.0.js"></script>
+	<script src="<s:url value="/js/jquery-1.11.0.js"/>"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="<s:url value="/js/bootstrap.min.js"/>"></script>
 </body>
 </html>
