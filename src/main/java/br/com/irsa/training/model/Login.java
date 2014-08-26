@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Login implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	private final Long id;
+	private Long id;
 	private String login;
 	private String senha;
 	public Login(Long id,String login, String senha) {
@@ -32,6 +32,13 @@ public class Login implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
+	@Deprecated
+	Login() {
+		super();
+	}
+	
+	
 	
 	
 }

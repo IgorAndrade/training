@@ -30,14 +30,20 @@ public class UsuarioLogado implements Serializable {
 	}
 
 	public String getNome() {
+		if(user==null)
+			return "Anonymous";
 		return user.getNome();
 	}
 
 	public String getEmail() {
+		if(user==null)
+			return "Anonymous";
 		return user.getEmail();
 	}
 
 	public StatusUser getStatus() {
+		if(user==null)
+			return StatusUser.INATIVO;
 		return user.getStatus();
 	}
 	

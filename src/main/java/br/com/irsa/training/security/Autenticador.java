@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -24,8 +25,9 @@ public class Autenticador implements AuthenticationProvider {
 	@Autowired
 	private IUsuarioService userService;
 	
-	@Autowired @Qualifier("userLogado")
-	private UsuarioLogado usuarioLogado;
+	@Autowired
+	private ApplicationContext context;
+	
 	
 	@Override
 	public Authentication authenticate(Authentication authentication)
@@ -41,9 +43,10 @@ public class Autenticador implements AuthenticationProvider {
 		 }
 		 
 		 List<String> allPermissoes = userService.gelAllPermissoes(usuario);
-		
-		 this.usuarioLogado.setUser(usuario);
-		 this.usuarioLogado.setAllPermissoes(allPermissoes);
+		 
+		 UsuarioLogado userLogado = (UsuarioLogado) context.getBean("userLogado");
+		 userLogado.setUser(usuario);
+		 userLogado.setAllPermissoes(allPermissoes);
 		 
 		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login,senha, GeradorAuthority.gerar(allPermissoes));
 		 
