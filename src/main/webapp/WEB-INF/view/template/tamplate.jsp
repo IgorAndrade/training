@@ -22,6 +22,7 @@
 
 <!-- Custom CSS -->
 <link href="<s:url value="/css/sb-admin.css"/>" rel="stylesheet">
+<link href="<s:url value="/css/style.css"/>" rel="stylesheet">
 
 <!-- Custom Fonts -->
 <link href="<s:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>"
@@ -39,7 +40,7 @@
 	<div id="wrapper">
 		<jsp:include page="header.jsp" />
 		<div id="page-wrapper">
-			<div class="container-fluid">
+			<div class="container-fluid" id="corpo">
 				<c:if test="${not empty SUCCESS}">
 					<div class="alert alert-success">
 						<strong><s:message code="success.titulo" /></strong> <c:out value="${SUCCESS}"/> 

@@ -1,0 +1,7 @@
+@CHARSET "ISO-8859-1";
+
+@media(min-height: 480px){
+    #corpo {
+        min-height: 400px;
+    }
+}

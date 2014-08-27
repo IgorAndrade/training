@@ -9,6 +9,6 @@
 <title>teste</title>
 </head>
 <body>
- nome: ${userLogado.nome }
+ nome: <c:if test="${not empty userLogado}"> ${userLogado.nome } </c:if>
 </body>
 </html>
