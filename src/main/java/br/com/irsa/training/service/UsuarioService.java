@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Login;
-import br.com.irsa.training.model.Permissoes;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.repository.ILoginRepository;
 import br.com.irsa.training.repository.IUsuarioRepository;
@@ -51,8 +51,8 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public List<Permissoes> gelAllPermissoes(Usuario usuario) {
-		 List<Permissoes> permissoes = (List<Permissoes>) ULrepository.getAllPermissoes(usuario, Calendar.getInstance());
+	public List<Permissao> gelAllPermissoes(Usuario usuario) {
+		 List<Permissao> permissoes = (List<Permissao>) ULrepository.getAllPermissoes(usuario, Calendar.getInstance());
 		return permissoes;
 	}
 

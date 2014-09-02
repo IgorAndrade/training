@@ -1,4 +1,4 @@
-package br.com.irsa.training.model;
+package br.com.irsa.training.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

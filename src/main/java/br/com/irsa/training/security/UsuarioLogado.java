@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.irsa.training.model.Permissoes;
-import br.com.irsa.training.model.StatusUser;
+import br.com.irsa.training.enums.Permissao;
+import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Usuario;
 
 //@Component("userLogado")
@@ -13,10 +13,10 @@ import br.com.irsa.training.model.Usuario;
 public class UsuarioLogado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Usuario user;
-	List<Permissoes> allPermissoes;
+	List<Permissao> allPermissoes;
 
 	public UsuarioLogado() {
-		this.allPermissoes = new ArrayList<Permissoes>();
+		this.allPermissoes = new ArrayList<Permissao>();
 		this.user = null;
 	}
 
@@ -46,11 +46,11 @@ public class UsuarioLogado implements Serializable {
 		return user.getStatus();
 	}
 
-	public void setAllPermissoes(List<Permissoes> allPermissoes) {
+	public void setAllPermissoes(List<Permissao> allPermissoes) {
 		this.allPermissoes = allPermissoes;
 	}
 
-	public List<Permissoes> getAllPermissoes() {
+	public List<Permissao> getAllPermissoes() {
 		return allPermissoes;
 	}
 

@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Login;
-import br.com.irsa.training.model.StatusUser;
 import br.com.irsa.training.model.Usuario;
 
 public class UserDetailsImp implements UserDetails, Serializable	 {

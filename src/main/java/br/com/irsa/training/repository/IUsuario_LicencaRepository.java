@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Licenca;
-import br.com.irsa.training.model.Permissoes;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.model.Usuario_Licenca;
 

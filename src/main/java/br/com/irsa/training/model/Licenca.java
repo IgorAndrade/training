@@ -12,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.com.irsa.training.enums.Permissao;
+
 @Entity
 public class Licenca implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,11 +25,11 @@ public class Licenca implements Serializable {
 	private Duracao duracao;
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
-	private List<Permissoes> permissoes;
+	private List<Permissao> permissoes;
 	private boolean ativo;
 	
 	public Licenca() {
-		this.permissoes =  new ArrayList<Permissoes>();
+		this.permissoes =  new ArrayList<Permissao>();
 	}
 	
 	public String getNome() {
@@ -43,17 +45,17 @@ public class Licenca implements Serializable {
 	public Duracao getDuracao() {
 		return duracao;
 	}
-	public List<Permissoes> getPermissoes() {
+	public List<Permissao> getPermissoes() {
 		return permissoes;
 	}
 	public void setDuracao(Duracao duracao) {
 		this.duracao = duracao;
 	}
-	public void setPermissoes(List<Permissoes> permissoes) {
+	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	} 
 	
-	public void addPermissao(Permissoes permissao){
+	public void addPermissao(Permissao permissao){
 		this.permissoes.add(permissao);
 	}
 	

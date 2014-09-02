@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import br.com.irsa.training.model.Permissoes;
+import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.service.IUsuarioService;
 
@@ -41,7 +41,7 @@ public class Autenticador implements AuthenticationProvider {
 			 throw new AuthenticationCredentialsNotFoundException("Usuario ou Senha invalido!");
 		 }
 		 
-		 List<Permissoes> allPermissoes = userService.gelAllPermissoes(usuario);
+		 List<Permissao> allPermissoes = userService.gelAllPermissoes(usuario);
 		 
 		 //UsuarioLogado userLogado = (UsuarioLogado) context.getBean("userLogado");
 		 UsuarioLogado userLogado = new UsuarioLogado();
