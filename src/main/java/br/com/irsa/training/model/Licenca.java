@@ -1,8 +1,9 @@
 package br.com.irsa.training.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -12,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.com.irsa.training.enums.Perfil;
 import br.com.irsa.training.enums.Permissao;
 
 @Entity
@@ -25,11 +27,11 @@ public class Licenca implements Serializable {
 	private Duracao duracao;
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
-	private List<Permissao> permissoes;
+	private Map<Perfil,Set<Permissao>> permissoes;
 	private boolean ativo;
 	
 	public Licenca() {
-		this.permissoes =  new ArrayList<Permissao>();
+		this.permissoes =  new HashMap<Perfil, Set<Permissao>>();
 	}
 	
 	public String getNome() {
@@ -45,18 +47,18 @@ public class Licenca implements Serializable {
 	public Duracao getDuracao() {
 		return duracao;
 	}
-	public List<Permissao> getPermissoes() {
+	public Map<Perfil, Set<Permissao>> getPermissoes() {
 		return permissoes;
 	}
 	public void setDuracao(Duracao duracao) {
 		this.duracao = duracao;
 	}
-	public void setPermissoes(List<Permissao> permissoes) {
+	public void setPermissoes(Map<Perfil, Set<Permissao>>permissoes) {
 		this.permissoes = permissoes;
 	} 
 	
-	public void addPermissao(Permissao permissao){
-		this.permissoes.add(permissao);
+	public void addPermissao(Perfil perfil,Permissao permissao){
+		this.permissoes.get(perfil).add(permissao);
 	}
 	
 	public void setAtivo(boolean ativo) {
@@ -68,7 +70,27 @@ public class Licenca implements Serializable {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
-		return this.id.equals(((Licenca) obj).getId());
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Licenca other = (Licenca) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 }
