@@ -1,5 +1,6 @@
 package br.com.irsa.training.test.factory;
 
+import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Duracao;
 import br.com.irsa.training.model.Licenca;
 import br.com.irsa.training.model.Usuario;
@@ -14,8 +15,9 @@ public class CriaUsuarioLicenca {
 
 	public static Usuario criaUsuario() {
 		Usuario usuario = new Usuario();
-		usuario.setNome("teste");
-		usuario.setEmail("teste@teste.com");
+		usuario.setNome("teste2");
+		usuario.setEmail("teste2@teste.com");
+		usuario.setStatus(StatusUser.ATIVO);
 		return usuario;
 	}
 
