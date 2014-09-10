@@ -1,26 +1,24 @@
 package br.com.irsa.training.test.repository;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
-
-import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Licenca;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.model.Usuario_Licenca;
@@ -65,23 +63,20 @@ public class IUsuario_LicencaRepositoryTest {
 	}
 	@Test
 	public void buscaLicencasAtivasUsuario(){
-	Usuario usuario = userRepository.findOne(new Long(2));
-	Licenca licenca = licencaRepository.findOne(new Long(2));
-	
-	List<Usuario_Licenca> list = ULRepository.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(usuario, licenca, Calendar.getInstance());
-	
-	assertThat(list.size(), is(2));
-	
+		Usuario usuario = userRepository.findOne(new Long(2));
+		Licenca licenca = licencaRepository.findOne(new Long(2));
+		
+		List<Usuario_Licenca> list = ULRepository.findByUsuarioAndLicencaAndDtFimAfterOrderByDtFimDesc(usuario, licenca, Calendar.getInstance());
+		
+		assertThat(list.size(), is(2));
 		
 	}
 
 	@Test 
 	public  void testListarPermissoes(){
 		Usuario usuario = userRepository.getOne(Long.valueOf(2));
-		List<String> permissoes = ULRepository.getAllPermissoes(usuario, Calendar.getInstance());
+		Set<Permissao> permissoes = ULRepository.getAllPermissoes(usuario, Calendar.getInstance());
 		
-		String[] expected = {"per 1","per 2"};
-		
-		assertThat("Lista diferente da esperada", permissoes, is(Arrays.asList(expected)));
+		assertThat("Lista diferente da esperada", permissoes, containsInAnyOrder(Permissao.CRIAR_SERIE,Permissao.CRIAR_TREINAMENTO));
 	}
 }

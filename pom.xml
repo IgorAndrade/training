@@ -68,7 +68,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		<groupId>org.springframework</groupId>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>4.0.6.RELEASE</version>
 		</dependency>
@@ -90,10 +90,10 @@
 			<version>${spring-secutity}</version>
 		</dependency>
 		<dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-config</artifactId>
-        <version>${spring-secutity}</version>
-    </dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-secutity}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
@@ -165,6 +165,11 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
 		</dependency>
 
 		<!-- rest -->
