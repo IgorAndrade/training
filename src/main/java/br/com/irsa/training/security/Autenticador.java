@@ -1,6 +1,8 @@
 package br.com.irsa.training.security;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Usuario;
+import br.com.irsa.training.service.IPermissaoService;
 import br.com.irsa.training.service.IUsuarioService;
 
 @Component("Autenticador")
@@ -22,6 +25,8 @@ public class Autenticador implements AuthenticationProvider {
 
 	@Autowired
 	private IUsuarioService userService;
+	@Autowired
+	private IPermissaoService permissaoService;
 	
 	@Autowired
 	private ApplicationContext context;
@@ -41,12 +46,13 @@ public class Autenticador implements AuthenticationProvider {
 			 throw new AuthenticationCredentialsNotFoundException("Usuario ou Senha invalido!");
 		 }
 		 
-		 List<Permissao> allPermissoes = userService.gelAllPermissoes(usuario);
+		 Map<Object, Set<Permissao>> map = permissaoService.getPermissoes(usuario);
+		 Set<Permissao> allPermissoes = map.get(usuario);
 		 
 		 //UsuarioLogado userLogado = (UsuarioLogado) context.getBean("userLogado");
 		 UsuarioLogado userLogado = new UsuarioLogado();
 		 userLogado.setUser(usuario);
-		 userLogado.setAllPermissoes(allPermissoes);
+		 userLogado.setAllPermissoes(map);
 		 session.setAttribute("userLogado", userLogado);
 		 
 		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login,senha, GeradorAuthority.gerar(allPermissoes));

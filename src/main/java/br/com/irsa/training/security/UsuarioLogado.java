@@ -2,7 +2,10 @@ package br.com.irsa.training.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.enums.StatusUser;
@@ -13,10 +16,10 @@ import br.com.irsa.training.model.Usuario;
 public class UsuarioLogado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Usuario user;
-	List<Permissao> allPermissoes;
+	Map<Object, Set<Permissao>> allPermissoes;
 
 	public UsuarioLogado() {
-		this.allPermissoes = new ArrayList<Permissao>();
+		this.allPermissoes = new HashMap<Object, Set<Permissao>>();
 		this.user = null;
 	}
 
@@ -46,16 +49,20 @@ public class UsuarioLogado implements Serializable {
 		return user.getStatus();
 	}
 
-	public void setAllPermissoes(List<Permissao> allPermissoes) {
+	public void setAllPermissoes(Map<Object, Set<Permissao>> allPermissoes) {
 		this.allPermissoes = allPermissoes;
 	}
 
-	public List<Permissao> getAllPermissoes() {
+	public Map<Object, Set<Permissao>> getAllPermissoes() {
 		return allPermissoes;
 	}
 
 	public boolean hasPermissao(String permissao) {
-		return this.allPermissoes.contains(permissao);
+		return this.allPermissoes.get(getUser()).contains(permissao);
+	}
+	
+	public boolean hasPermissao(Object obj, String permissao) {
+		return this.allPermissoes.get(obj).contains(permissao);
 	}
 
 	public void logOut() {

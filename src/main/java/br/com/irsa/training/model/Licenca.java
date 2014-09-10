@@ -2,9 +2,11 @@ package br.com.irsa.training.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MapKeyEnumerated;
+import javax.persistence.OneToMany;
 
 import br.com.irsa.training.enums.Perfil;
 import br.com.irsa.training.enums.Permissao;
@@ -25,13 +29,15 @@ public class Licenca implements Serializable {
 	private String nome;
 	@Embedded 
 	private Duracao duracao;
+	
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
-	private Map<Perfil,Set<Permissao>> permissoes;
+	private Set<Permissao> permissoes;
+	
 	private boolean ativo;
 	
 	public Licenca() {
-		this.permissoes =  new HashMap<Perfil, Set<Permissao>>();
+		this.permissoes =  new HashSet<Permissao>();
 	}
 	
 	public String getNome() {
@@ -47,18 +53,20 @@ public class Licenca implements Serializable {
 	public Duracao getDuracao() {
 		return duracao;
 	}
-	public Map<Perfil, Set<Permissao>> getPermissoes() {
-		return permissoes;
-	}
 	public void setDuracao(Duracao duracao) {
 		this.duracao = duracao;
 	}
-	public void setPermissoes(Map<Perfil, Set<Permissao>>permissoes) {
-		this.permissoes = permissoes;
-	} 
 	
-	public void addPermissao(Perfil perfil,Permissao permissao){
-		this.permissoes.get(perfil).add(permissao);
+	public Set<Permissao> getPermissoes() {
+		return permissoes;
+	}
+	
+	public void setPermissoes(Set<Permissao> permissoes) {
+		this.permissoes = permissoes;
+	}
+	
+	public void addPermissao(Permissao permissao){
+		this.permissoes.add(permissao);
 	}
 	
 	public void setAtivo(boolean ativo) {
