@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +21,7 @@ import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.service.IPermissaoService;
 import br.com.irsa.training.service.IUsuarioService;
 
-@Component("Autenticador")
+@Component("Autenticador") @Profile("producao")
 public class Autenticador implements AuthenticationProvider {
 
 	@Autowired
