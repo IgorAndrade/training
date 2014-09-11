@@ -19,7 +19,7 @@ public class PersonalProfile implements Serializable {
 	private String especialidades;
 	
 	public PersonalProfile() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	public PersonalProfile(Usuario professor) {
 		this.professor = professor;

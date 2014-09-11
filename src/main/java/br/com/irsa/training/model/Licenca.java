@@ -30,6 +30,9 @@ public class Licenca implements Serializable {
 	@Embedded 
 	private Duracao duracao;
 	
+	@Enumerated(EnumType.STRING)
+	private Perfil perfil;
+	
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	private Set<Permissao> permissoes;
@@ -38,6 +41,7 @@ public class Licenca implements Serializable {
 	
 	public Licenca() {
 		this.permissoes =  new HashSet<Permissao>();
+		this.perfil = Perfil.USUARIO;
 	}
 	
 	public String getNome() {
@@ -76,6 +80,15 @@ public class Licenca implements Serializable {
 	public boolean getAtivo(){
 		return this.ativo;
 	}
+	
+	public Perfil getPerfil() {
+		return perfil;
+	}
+	
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+		
 	
 	@Override
 	public int hashCode() {

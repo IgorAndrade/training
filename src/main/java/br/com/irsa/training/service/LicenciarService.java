@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.irsa.training.enums.Perfil;
 import br.com.irsa.training.model.Licenca;
+import br.com.irsa.training.model.PersonalProfile;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.model.Usuario_Licenca;
 import br.com.irsa.training.regradenegocio.GeradorExcecoes;
 import br.com.irsa.training.regradenegocio.RegraNegocioException;
 import br.com.irsa.training.regradenegocio.RegrasNegocio;
+import br.com.irsa.training.repository.IPersonalRepository;
 import br.com.irsa.training.repository.IUsuario_LicencaRepository;
 @Service
 public class LicenciarService implements ILicenciarService {
@@ -19,6 +22,8 @@ public class LicenciarService implements ILicenciarService {
 	GeradorExcecoes excecoes ; 
 	@Autowired
 	private IUsuario_LicencaRepository repository;
+	@Autowired
+	private IPersonalRepository personalRepository;
 	
 	@Override 
 	public void licenciarUsuario(Usuario usuario, Licenca licenca) throws RegraNegocioException {
@@ -27,6 +32,10 @@ public class LicenciarService implements ILicenciarService {
 			throw excecoes.getRNException(RegrasNegocio.LicencaInativa, new String[]{licenca.getNome()});
 		}
 		
+		if(licenca.getPerfil() == Perfil.PERSONAL){
+			licenciarPersonal(usuario, licenca);
+		
+		}
 		Usuario_Licenca ul = new Usuario_Licenca(usuario, licenca);
 		
 		ul.setDtInicio(buscarDataFinalLicenca(usuario,licenca));
@@ -56,5 +65,14 @@ public class LicenciarService implements ILicenciarService {
 		this.repository = repository;
 	}
 	
-
+	private void licenciarPersonal(Usuario usuario, Licenca licenca){
+		PersonalProfile personal = personalRepository.findOne(usuario);
+		if(personal ==null){
+			personal = new PersonalProfile(usuario);
+			personalRepository.save(personal);
+		}
+		
+		
+		
+	}
 }
