@@ -27,8 +27,8 @@ public class Autenticador implements AuthenticationProvider {
 	
 	@Autowired
 	private ApplicationContext context;
-	@Autowired
-	private HttpSession session;
+//	@Autowired
+//	private HttpSession session;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication)

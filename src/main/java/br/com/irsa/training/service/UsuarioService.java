@@ -85,4 +85,8 @@ public class UsuarioService implements IUsuarioService {
 		String nome = usuario.getNome();
 		return usuario;
 	}
+	
+	public void setListBuscador(List<IBuscadorUserPermissao> listBuscador) {
+		this.listBuscador = listBuscador;
+	}
 }
