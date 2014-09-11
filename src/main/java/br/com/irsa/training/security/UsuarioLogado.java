@@ -1,18 +1,19 @@
 package br.com.irsa.training.security;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Usuario;
 
-//@Component("userLogado")
-//@Scope("session")
+@Component("userLogado")
+@Scope("session")
 public class UsuarioLogado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Usuario user;

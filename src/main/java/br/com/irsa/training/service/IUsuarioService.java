@@ -1,6 +1,8 @@
 package br.com.irsa.training.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Usuario;
@@ -12,6 +14,6 @@ public interface IUsuarioService {
 	public void setRepository(IUsuarioRepository repository);
 	public Usuario buscarPorID(Long id);
 	public  Usuario buscarPorEmail(String email);
-	public List<Permissao> gelAllPermissoes(Usuario usuario);
+	public Map<Object, Set<Permissao>> getPermissoes(Usuario usuario);
 	public Usuario getUserbyLogin(String login, String senha);
 }
