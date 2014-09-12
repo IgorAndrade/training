@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
@@ -24,7 +24,8 @@
 						code="form.login.senha" /></label> <input type="password"
 					class="form-control" name="senha" id="InputPassword">
 			</div>
-			<button type="submit" class="btn btn-default"><s:message code="form.login.btn.logar"/></button>
+			<button type="submit" class="btn btn-default"><s:message code="form.login.btn.logar"/></button><br>
+			<a href='<s:url value="/user"/>' class="btn btn-default"><s:message code="form.login.btn.cad"/></a>
 		</f:form>
 	</div>
-</div>
+</div> 

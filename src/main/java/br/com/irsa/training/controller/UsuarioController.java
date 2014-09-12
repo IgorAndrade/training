@@ -28,13 +28,13 @@ public class UsuarioController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView novo(){
-		ModelAndView mv = new ModelAndView("user/user");
+		ModelAndView mv = new ModelAndView("user/editUser");
 		Usuario usuario = new Usuario();
 		usuario.setNome("novo");
 		mv.addObject("user", usuario);
 		return mv;
 	}
-	@RequestMapping(value="novo",method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/novo",method = RequestMethod.GET, produces = "application/json")
 	public Usuario novoUser(){
 		Usuario usuario = new Usuario();
 		usuario.setNome("novo");

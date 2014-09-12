@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,8 @@
 <link href="<s:url value="/css/style.css"/>" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="<s:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>"
+<link
+	href="<s:url value="/resources/font-awesome-4.1.0/css/font-awesome.min.css"/>"
 	rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,18 +38,22 @@
 
 </head>
 <body>
+	<!-- jQuery Version 1.11.0 -->
+
 	<div id="wrapper">
 		<jsp:include page="header.jsp" />
 		<div id="page-wrapper">
 			<div class="container-fluid" id="corpo">
 				<c:if test="${not empty SUCCESS}">
 					<div class="alert alert-success">
-						<strong><s:message code="success.titulo" /></strong> <c:out value="${SUCCESS}"/> 
+						<strong><s:message code="success.titulo" /></strong>
+						<c:out value="${SUCCESS}" />
 					</div>
 				</c:if>
 				<c:if test="${not empty ERROR}">
 					<div class="alert alert-danger">
-						<strong><s:message code="erro.titulo" /></strong> <c:out value="${ERROR}"/>
+						<strong><s:message code="erro.titulo" /></strong>
+						<c:out value="${ERROR}" />
 					</div>
 				</c:if>
 
@@ -59,12 +64,14 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
+	
 	<!-- /#wrapper -->
-
-	<!-- jQuery Version 1.11.0 -->
 	<script src="<s:url value="/js/jquery-1.11.0.js"/>"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="<s:url value="/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" >
+$( document ).ready(form.init());
+</script>
 </body>
 </html>
