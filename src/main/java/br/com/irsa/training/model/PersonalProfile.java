@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class PersonalProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id @OneToOne
+	@Id 
 	private Usuario professor;
 	private String especialidades;
 	
