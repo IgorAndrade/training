@@ -25,7 +25,7 @@ public class RegraNegocioExceptionTest {
 	public void testRNSemParametro() {
 		try {
 			
-			throw rn.getRNException(RegrasNegocio.CadastroRepetido, null);
+			throw rn.getRNException(RegrasNegocio.CadastroRepetido);
 		} catch (RegraNegocioException rnE) {
 			assertEquals("Cadastro Repetido!", rnE.getMessage());
 		}

@@ -20,7 +20,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-6">
-			<form role="form">
+			<form role="form" action="/salvar">
 				<div class="form-group">
 					<label class="control-label" for="nome"><s:message code="form.user.nome"/></label>
 					 <input class="form-control" id="nome" name="nome" />
@@ -28,9 +28,9 @@
 				<div class="form-group">
 					<label class="control-label" for="email"><s:message code="form.user.email"/></label>
 					 <input class="form-control" id="email" name="email" placeholder="Login">
-					<p class="help-block">Example block-level help text here.</p>
+					<p class="help-block"></p>
 				</div>
-				<button id="salvar"><s:message code="form.user.btn.salvar" /></button>
+				<a id="salvar" class="btn btn-default"><s:message code="form.user.btn.salvar" /></a>
 			</form>
 		</div>
 	</div>

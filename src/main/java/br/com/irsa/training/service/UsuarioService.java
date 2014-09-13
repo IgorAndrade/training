@@ -11,9 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.irsa.training.enums.Permissao;
+import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Login;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.permissao.IBuscadorUserPermissao;
+import br.com.irsa.training.regradenegocio.GeradorExcecoes;
+import br.com.irsa.training.regradenegocio.RegraNegocioException;
+import br.com.irsa.training.regradenegocio.RegrasNegocio;
 import br.com.irsa.training.repository.ILoginRepository;
 import br.com.irsa.training.repository.IUsuarioRepository;
 import br.com.irsa.training.repository.IUsuario_LicencaRepository;
@@ -28,17 +32,23 @@ public class UsuarioService implements IUsuarioService {
 	private IUsuario_LicencaRepository ULrepository;
 	@Autowired
 	private ILoginRepository loginRepository;
-	
+	@Autowired
+	private GeradorExcecoes gerador;
 	@Autowired
 	private List<IBuscadorUserPermissao> listBuscador;
 
 	@Override
-	public void salvar(Usuario user) throws Exception {
+	public void salvar(Usuario user) throws RegraNegocioException, Exception {
 		if (user == null)
 			throw new Exception("sem usuario");
-		if (user.getNome() != null && user.getEmail() != null)
+		if (user.getNome() != null && user.getEmail() != null){
+			Usuario repetido = userRepository.findByEmail(user.getEmail());
+			if(repetido != null)
+				throw gerador.getRNException(RegrasNegocio.CadastroRepetido, user.getEmail());
+			if(user.getStatus() ==null)
+				user.setStatus(StatusUser.ATIVO);
 			userRepository.save(user);
-
+		}
 	}
 
 	public void setRepository(IUsuarioRepository repository) {
