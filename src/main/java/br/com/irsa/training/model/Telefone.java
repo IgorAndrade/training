@@ -3,6 +3,8 @@ package br.com.irsa.training.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,12 +22,17 @@ public class Telefone implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	private TelefoneTipos tipo;
 	private String telefone;
 	
 	@ManyToOne
 	private Usuario user;
  
+	public Telefone(TelefoneTipos tipo,String telefone) {
+		this.tipo = tipo;
+		this.telefone = telefone;
+	}
 	public TelefoneTipos getTipo() {
 		return tipo;
 	}

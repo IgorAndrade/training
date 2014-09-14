@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.irsa.training.model.TelefoneTipos;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.regradenegocio.RegraNegocioException;
 import br.com.irsa.training.repository.ILicencaRepository;
@@ -94,21 +95,9 @@ public class UsuarioController {
 		return resposta;
 	}
 
-//	@RequestMapping(value = "/UserByEmail", method = RequestMethod.POST, produces = "application/json")
-//	public JsonResponse getUserByEmailpost(String email) {
-//		JsonResponse resposta = new JsonResponse();
-//		Usuario usuario = service.buscarPorEmail(email);
-//		if (usuario == null) {
-//			resposta.setStatus(JsonResponse.FAIL);
-//			resposta.setMessage(msg.getMessage(
-//					"erro.regranegocio.usuarioNaoEncontrado", null, null));
-//		} else {
-//			resposta.setStatus(JsonResponse.SUCCESS);
-//			resposta.setMessage(msg.getMessage(
-//					"erro.regranegocio.emailRepetido", null, null));
-//			resposta.setResult(usuario);
-//		}
-//		return resposta;
-//	}
+	@RequestMapping(value = "/telefoneTipos", method = RequestMethod.GET, produces = "application/json")
+	public TelefoneTipos[] getTelefoneTipos(){
+		return TelefoneTipos.values();
+	}
 
 }

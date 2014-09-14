@@ -25,6 +25,7 @@
         <intercept-url requires-channel="http" pattern="/user*" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/user/salvar" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/user/UserByEmail*" access="permitAll()" />
+        <intercept-url requires-channel="http" pattern="/user/telefoneTipos" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/message*" access="permitAll()" />
         <intercept-url requires-channel="http" pattern="/adm/*" access="hasRole('ROLE_ADM')" />
         <intercept-url requires-channel="http" pattern="/**" access="isAuthenticated()" />
