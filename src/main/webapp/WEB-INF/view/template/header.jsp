@@ -109,7 +109,9 @@
 					<li><a href='<s:url value="/logout"></s:url>'><i class="fa fa-fw fa-power-off"></i> <s:message code="menu.sair" /></a></li>
 				</ul></li>
 		</ul>
+		<sec:authorize access="isAuthenticated()" >
 		<jsp:include page="menu.jsp"/>
+		</sec:authorize>
 	</nav>
 </body>
 

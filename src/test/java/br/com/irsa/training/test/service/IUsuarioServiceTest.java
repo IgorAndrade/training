@@ -59,6 +59,11 @@ public class IUsuarioServiceTest {
 	}
 	
 	@Test
+	public void testSalvarRepetido()throws Exception{
+		
+	}
+	
+	@Test
 	public void testSalvar() throws Exception {
 
 		Usuario usuario = new Usuario();

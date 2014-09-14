@@ -8,7 +8,7 @@ var form={
 				var dados = $( "form" ).serialize();
 				user.salvarUsuario(dados);
 			});
-			$("#email").blur(function(){user.checkEmail("#email");});
+			$("#email").blur(function(){user.checkEmail($(email).val());});
 			
 			
 		}
@@ -16,9 +16,11 @@ var form={
 
 user = {
 	checkEmail:function(email){
-		$.post("user/UserByEmail",$(email).serialize(),function(res){
+		$.get("user/UserByEmail?email="+email,function(res){
 			if(res.success){
-				erro.add("#email", res.message);
+				message.get("erro.regranegocio.emailRepetido", null, function(resp){
+					erro.add("#email", resp);
+				});
 			}
 		});
 	},
@@ -54,6 +56,7 @@ message={
 		'<strong>Sucesso!</strong> '+msg+'</div>';
 		this.clean();
 		$('#corpo > .row').first().before(alert);
+		$('div.alert').hover(function(){message.clean();});
 	},
 
 	info:function(msg){
@@ -61,6 +64,7 @@ message={
 		'<strong>Info!</strong> '+msg+'</div>';
 		this.clean();
 		$('#corpo > .row').first().before(alert);
+		$('div.alert').hover(function(){message.clean();});
 	},
 	
 	error:function(msg){
@@ -68,9 +72,17 @@ message={
 		'<strong>Erro!</strong> '+msg+'</div>';
 		this.clean();
 		$('#corpo > .row').first().before(alert);
+		$('div.alert').hover(function(){message.clean();});
 	},
 	
 	clean:function(){
 		$('div.alert').remove();
+	},
+	
+	get:function(cod,param,funcao){
+		var url= "message?cod="+cod;
+		if(param != null || param != "")
+			url+="&param="+param;
+		$.get(url,funcao);
 	}
 };

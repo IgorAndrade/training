@@ -11,7 +11,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-md-6">
 		<f:form action="logar" method="POST">
 			<div class="form-group">
 				<label for="InputEmail"><s:message code="form.login.login" />
@@ -20,12 +20,21 @@
 					placeholder="<s:message code="form.login.login.title" />">
 			</div>
 			<div class="form-group">
+				<a href="#" class="pull-right"><s:message
+						code="form.login.btn" /></a>
 				<label for="InputPassword"><s:message
-						code="form.login.senha" /></label> <input type="password"
+						code="form.login.senha" /></label>
+				 <input type="password"
 					class="form-control" name="senha" id="InputPassword">
 			</div>
-			<button type="submit" class="btn btn-default"><s:message code="form.login.btn.logar"/></button><br>
-			<a href='<s:url value="/user"/>' class="btn btn-default"><s:message code="form.login.btn.cad"/></a>
+			<div class="row">
+				<div class="col-xs-6">
+					<button type="submit" class="btn btn-primary"><s:message code="form.login.btn.logar"/></button>
+				</div>
+				<div class="col-xs-6">
+					<a href='<s:url value="/user"/>' class="btn btn-default pull-right"><s:message code="form.login.btn.cad"/></a>
+				</div>
+			</div>
 		</f:form>
 	</div>
 </div> 

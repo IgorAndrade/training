@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -66,8 +67,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-	public Usuario getUser(@PathVariable("id") Long id)
-			throws JsonProcessingException {
+	public Usuario getUser(@PathVariable("id") Long id) {
 		Usuario usuario = service.buscarPorID(id);
 		return usuario;
 	}
@@ -79,8 +79,8 @@ public class UsuarioController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/UserByEmail/{email}", method = RequestMethod.GET, produces = "application/json")
-	public JsonResponse getUserByEmail(@PathVariable("email") String email) {
+	@RequestMapping(value = "/UserByEmail", method = RequestMethod.GET, produces = "application/json")
+	public JsonResponse getUserByEmail(@RequestParam("email") String email) {
 		JsonResponse resposta = new JsonResponse();
 		Usuario usuario = service.buscarPorEmail(email);
 		if (usuario == null) {
@@ -94,21 +94,21 @@ public class UsuarioController {
 		return resposta;
 	}
 
-	@RequestMapping(value = "/UserByEmail", method = RequestMethod.POST, produces = "application/json")
-	public JsonResponse getUserByEmailpost(String email) {
-		JsonResponse resposta = new JsonResponse();
-		Usuario usuario = service.buscarPorEmail(email);
-		if (usuario == null) {
-			resposta.setStatus(JsonResponse.FAIL);
-			resposta.setMessage(msg.getMessage(
-					"erro.regranegocio.usuarioNaoEncontrado", null, null));
-		} else {
-			resposta.setStatus(JsonResponse.SUCCESS);
-			resposta.setMessage(msg.getMessage(
-					"erro.regranegocio.emailRepetido", null, null));
-			resposta.setResult(usuario);
-		}
-		return resposta;
-	}
+//	@RequestMapping(value = "/UserByEmail", method = RequestMethod.POST, produces = "application/json")
+//	public JsonResponse getUserByEmailpost(String email) {
+//		JsonResponse resposta = new JsonResponse();
+//		Usuario usuario = service.buscarPorEmail(email);
+//		if (usuario == null) {
+//			resposta.setStatus(JsonResponse.FAIL);
+//			resposta.setMessage(msg.getMessage(
+//					"erro.regranegocio.usuarioNaoEncontrado", null, null));
+//		} else {
+//			resposta.setStatus(JsonResponse.SUCCESS);
+//			resposta.setMessage(msg.getMessage(
+//					"erro.regranegocio.emailRepetido", null, null));
+//			resposta.setResult(usuario);
+//		}
+//		return resposta;
+//	}
 
 }
