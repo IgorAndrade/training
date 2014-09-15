@@ -51,7 +51,7 @@ user = {
 			var o = {};
 			o['tipo'] = v;
 			o['telefone'] = telefones[k];
-			o['"@class'] = 'br.com.irsa.training.model.Telefone';
+		//	o['"@class'] = 'br.com.irsa.training.model.Telefone';
 			listTelefones.push(o);
 		});
 		 user.tipo=null;

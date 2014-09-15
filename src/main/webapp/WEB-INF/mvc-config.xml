@@ -13,7 +13,7 @@
 
 	<!-- Uncomment and your base-package here: <context:component-scan base-package="org.springframework.samples.web"/> -->
 	<tx:annotation-driven />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="applicationConversionService" />
 	<context:component-scan base-package="br.com.irsa.training" scoped-proxy="targetClass" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
