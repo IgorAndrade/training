@@ -35,6 +35,7 @@ user = {
 		var array = $("form").serializeArray();
 		var usuario = toJson(array);
 		usuario = this.trataUserTels(usuario);
+		usuario = JSON.stringify(usuario);
 		$.post("user/salvar", usuario, function(res) {
 			if (res.success) {
 				message.success(res.message);
@@ -54,9 +55,9 @@ user = {
 		//	o['"@class'] = 'br.com.irsa.training.model.Telefone';
 			listTelefones.push(o);
 		});
-		 user.tipo=null;
-		 user.telefone=null;
-		user['tels'] = listTelefones;
+		 delete user['tipo'];
+		 delete user['telefone'];
+		user['telefones'] = listTelefones;
 		return user;
 	},
 	

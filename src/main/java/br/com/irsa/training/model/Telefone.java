@@ -28,7 +28,7 @@ public class Telefone implements Serializable {
 	
 	@ManyToOne
 	private Usuario user;
- 
+ public Telefone() {}
 	public Telefone(TelefoneTipos tipo,String telefone) {
 		this.tipo = tipo;
 		this.telefone = telefone;

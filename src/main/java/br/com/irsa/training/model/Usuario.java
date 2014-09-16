@@ -69,10 +69,12 @@ public class Usuario implements Serializable {
 	public List<Telefone> getTels() {
 		return tels;
 	}
+	
 	public void setTels(ArrayList<Telefone> tels) {
 		this.tels = tels;
 	}
-	public void setTels(Telefone tel) {
+	
+	public void addTel(Telefone tel) {
 		tel.setUser(this);
 		this.tels.add(tel);
 	}

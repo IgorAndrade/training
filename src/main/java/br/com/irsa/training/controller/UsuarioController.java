@@ -1,8 +1,10 @@
 package br.com.irsa.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +17,8 @@ import br.com.irsa.training.regradenegocio.RegraNegocioException;
 import br.com.irsa.training.repository.ILicencaRepository;
 import br.com.irsa.training.service.IUsuarioService;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/user")
@@ -25,7 +28,8 @@ public class UsuarioController {
 	ILicencaRepository r;
 	@Autowired
 	private MessageSource msg;
-
+	@Autowired @Qualifier("ObjectMapperCustom")
+	ObjectMapper mapper;
 	@Autowired
 	private IUsuarioService service;
 
@@ -46,9 +50,11 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json")
-	public JsonResponse salvar(Usuario user) {
+	public JsonResponse salvar(@RequestBody String jsonUser) {
 		JsonResponse response = new JsonResponse();
 		try {
+			jsonUser = java.net.URLDecoder.decode(jsonUser, "UTF-8");
+			Usuario user = mapper.readValue(jsonUser, Usuario.class);
 			service.salvar(user);
 			response.setStatus(JsonResponse.SUCCESS);
 			String[] nomes = { user.getNome() };
@@ -58,11 +64,12 @@ public class UsuarioController {
 		} catch (RegraNegocioException rn) {
 			response.setStatus(JsonResponse.FAIL);
 			response.setMessage(rn.getMessage());
-			
+		}catch ( JsonParseException jerro) {
+			response.setStatus(JsonResponse.FAIL);
+			response.setMessage(jerro.getMessage());
 		} catch (Exception e) {
 			response.setStatus(JsonResponse.FAIL);
 			response.setMessage(e.getMessage());
-			response.setResult(user);
 		}
 		return response;
 	}
