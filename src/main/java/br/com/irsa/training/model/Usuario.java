@@ -10,6 +10,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -36,7 +38,9 @@ public class Usuario implements Serializable {
 	private Endereco endereco;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	 @JoinTable(name = "User_Telefone", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "tel_id"))
 	private List<Telefone> tels;
 	
 	public Usuario() {
@@ -74,10 +78,6 @@ public class Usuario implements Serializable {
 		this.tels = tels;
 	}
 	
-	public void addTel(Telefone tel) {
-		tel.setUser(this);
-		this.tels.add(tel);
-	}
 
 	@Override
 	public String toString() {

@@ -26,8 +26,6 @@ public class Telefone implements Serializable {
 	private TelefoneTipos tipo;
 	private String telefone;
 	
-	@ManyToOne
-	private Usuario user;
  public Telefone() {}
 	public Telefone(TelefoneTipos tipo,String telefone) {
 		this.tipo = tipo;
@@ -48,16 +46,14 @@ public class Telefone implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
 
 	public Long getId() {
 		return id;
 	}
 	
-	@JsonIgnore
-	public Usuario getUser() {
-		return user;
+	@Override
+	public String toString() {
+		return "Tipo: "+this.tipo.name()+" - "+this.telefone;
 	}
+	
 }
