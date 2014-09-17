@@ -70,6 +70,11 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="<s:url value="/js/bootstrap.min.js"/>"></script>
+<!-- 	Funções  -->
+	<script src="<s:url value="/js/scripts.js"/>"></script>
+	
+	<script src="<s:url value="/js/form2js.js"/>"></script>
+	<script src="<s:url value="/js/jquery.toObject.js"/>"></script>
 <script type="text/javascript" >
 $( document ).ready(form.init());
 </script>
