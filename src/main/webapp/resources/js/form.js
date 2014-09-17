@@ -5,8 +5,9 @@
 var form = {
 	init : function() {
 		$("#salvar").click(function() {
-			var dados = $("form").serialize();
-			user.salvarUsuario(dados);
+		//	var dados = $("form").serialize();
+		//	user.salvarUsuario("form");
+			erro.add("input[name='telefones[0].tipo']", "nao preehsh");
 		});
 		$("#email").blur(function() {
 			user.checkEmail($(email).val());
@@ -31,36 +32,24 @@ user = {
 		});
 	},
 
-	salvarUsuario : function(dados) {
-		var array = $("form").serializeArray();
-		var usuario = toJson(array);
-		usuario = this.trataUserTels(usuario);
-		usuario = JSON.stringify(usuario);
-		$.post("user/salvar", usuario, function(res) {
-			if (res.success) {
-				message.success(res.message);
-			} else
-				message.error(res.message);
+	
+	salvarUsuario : function(form) {
+		var usuario = $(form).toObject({mode: 'first'});
+		var strUsuario = JSON.stringify(usuario);
+		$.ajax({
+			url:"user/salvar",
+			type:"POST",
+			contentType:"application/json;charset=UTF-8",
+			data:strUsuario,
+			success:function(res) {
+				if (res.success) {
+					message.success(res.message);
+				} else
+					message.error(res.message);
+			}
 		});
 	},
 
-	trataUserTels:function(user){
-		var tipos = user.tipo;
-		var telefones = user.telefone;
-		var listTelefones =[];
-		$.each(tipos,function(k,v){
-			var o = {};
-			o['tipo'] = v;
-			o['telefone'] = telefones[k];
-		//	o['"@class'] = 'br.com.irsa.training.model.Telefone';
-			listTelefones.push(o);
-		});
-		 delete user['tipo'];
-		 delete user['telefone'];
-		user['telefones'] = listTelefones;
-		return user;
-	},
-	
 	populaTipoTel : function() {
 		$.ajax({
 			url : "user/telefoneTipos",
@@ -79,90 +68,6 @@ user = {
 
 };
 
-erro = {
-	add : function(campo, msg) {
-		$(campo).parent().addClass("has-error");
-		$(campo).siblings(".help-block").text(msg);
-		$(campo).focus(function() {
-			erro.clear(campo);
-		});
-	},
-
-	clear : function(campo) {
-		$(campo).parent().removeClass("has-error");
-		$(campo).siblings(".help-block").text("");
-	},
-
-};
-
-message = {
-
-	success : function(msg) {
-		alert = '<div class="alert alert-success" role="alert">'
-				+ '<strong>Sucesso!</strong> ' + msg + '</div>';
-		this.clean();
-		$('#corpo > .row').first().before(alert);
-		$('div.alert').hover(function() {
-			message.clean();
-		});
-	},
-
-	info : function(msg) {
-		alert = '<div class="alert alert-info" role="alert">'
-				+ '<strong>Info!</strong> ' + msg + '</div>';
-		this.clean();
-		$('#corpo > .row').first().before(alert);
-		$('div.alert').hover(function() {
-			message.clean();
-		});
-	},
-
-	error : function(msg) {
-		alert = '<div class="alert alert-danger" role="alert">'
-				+ '<strong>Erro!</strong> ' + msg + '</div>';
-		this.clean();
-		$('#corpo > .row').first().before(alert);
-		$('div.alert').hover(function() {
-			message.clean();
-		});
-	},
-
-	clean : function() {
-		$('div.alert').remove();
-	},
-
-	get : function(cod, param) {
-		var url = "message?cod=" + cod;
-		var retorno = null;
-		if (param != null || param != "")
-			url += "&param=" + param;
-		$.ajax({
-			url : url,
-			type : 'GET',
-			async : false,
-			success : function(resp) {
-				retorno = resp;
-			}
-		});
-		return retorno;
-	}
-};
-
-function toJson(array) {
-	var o = {};
-	$.each(array, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [ o[this.name] ];
-			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-}
-
 // Trata telefones
 var addFormGroup = function(event) {
 	event.preventDefault();
@@ -174,7 +79,7 @@ var addFormGroup = function(event) {
 	$(this).toggleClass('btn-success btn-add btn-danger btn-remove').html('–');
 
 	$formGroupClone.find('input').val('');
-	$formGroupClone.find('.concept').text('Phone');
+	$formGroupClone.find('.concept').text('Tipo:');
 	$formGroupClone.insertAfter($formGroup);
 
 	var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
@@ -182,6 +87,7 @@ var addFormGroup = function(event) {
 	if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
 		$lastFormGroupLast.find('.btn-add').attr('disabled', true);
 	}
+	renameFormGroup();
 };
 
 var removeFormGroup = function(event) {
@@ -196,7 +102,10 @@ var removeFormGroup = function(event) {
 	}
 
 	$formGroup.remove();
+	renameFormGroup();
 };
+
+
 
 var selectFormGroup = function(event) {
 	event.preventDefault();
@@ -213,3 +122,16 @@ var selectFormGroup = function(event) {
 var countFormGroup = function($form) {
 	return $form.find('.form-group').length;
 };
+
+function renameFormGroup(){
+	var i=0;
+	$('.tipo').each(function() {
+	    this.name= this.name.replace( this.name.match(/\[[0-9]+\]/), '['+i+']');
+	    i++;
+	});
+	i=0;
+	$('.numero').each(function() {
+		this.name= this.name.replace(this.name.match(/\[[0-9]+\]/), '['+i+']');
+		i++;
+	});
+}

@@ -37,17 +37,18 @@
 					<div class="input-group-btn input-group-select">
 						<button type="button" class="btn btn-default dropdown-toggle"
 							data-toggle="dropdown">
-							<span class="concept">Phone</span> <span class="caret"></span>
+							<span class="concept">Tipo:</span> <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 						</ul>
-						<input type="hidden" class="input-group-select-val"
-							name="tipo" value="">
+						<input type="hidden" class="input-group-select-val tipo"
+							name="telefones[0].tipo" value="">
 					</div>
-					<input type="text" name="telefone" class="form-control">
+					<input type="text" name="telefones[0].telefone" class="form-control numero">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-success btn-add">+</button>
 					</span>
+					<span class="help-block"></span>
 				</div>
 			</div>
 		</form>
