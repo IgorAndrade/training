@@ -23,7 +23,7 @@ import br.com.irsa.training.repository.IUsuarioRepository;
 import br.com.irsa.training.repository.IUsuario_LicencaRepository;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=RegraNegocioException.class)
 public class UsuarioService implements IUsuarioService {
 
 	@Autowired
@@ -41,7 +41,10 @@ public class UsuarioService implements IUsuarioService {
 	public void salvar(Usuario user) throws RegraNegocioException, Exception {
 		if (user == null)
 			throw new Exception("sem usuario");
-		if (user.getNome() != null && user.getEmail() != null){
+		if(user.getId() != null)
+			userRepository.save(user);
+		
+		else if (user.getNome() != null && user.getEmail() != null){
 			Usuario repetido = userRepository.findByEmail(user.getEmail());
 			if(repetido != null)
 				throw gerador.getRNException(RegrasNegocio.CadastroRepetido, user.getEmail());
@@ -57,7 +60,7 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public Usuario buscarPorID(Long id) {
-		Usuario usuario = userRepository.getOne(id);
+		Usuario usuario = userRepository.findOne(id);
 		return usuario;
 	}
 
@@ -98,5 +101,12 @@ public class UsuarioService implements IUsuarioService {
 	
 	public void setListBuscador(List<IBuscadorUserPermissao> listBuscador) {
 		this.listBuscador = listBuscador;
+	}
+	
+	public void apagarUsuario(Usuario user){
+		userRepository.delete(user);
+	}
+	public void apagarUsuario(Long id){
+		userRepository.delete(id);
 	}
 }

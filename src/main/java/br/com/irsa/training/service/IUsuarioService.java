@@ -16,4 +16,6 @@ public interface IUsuarioService {
 	public  Usuario buscarPorEmail(String email);
 	public Map<Object, Set<Permissao>> getPermissoes(Usuario usuario);
 	public Usuario getUserbyLogin(String login, String senha);
+	public void apagarUsuario(Usuario usuario);
+	public void apagarUsuario(Long id);
 }

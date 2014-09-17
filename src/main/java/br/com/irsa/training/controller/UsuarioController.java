@@ -49,11 +49,10 @@ public class UsuarioController {
 		return usuario;
 	}
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json;charset=UTF-8",consumes={"application/json;charset=UTF-8" ,"application/x-www-form-urlencoded;charset=UTF-8"})
 	public JsonResponse salvar(@RequestBody String jsonUser) {
 		JsonResponse response = new JsonResponse();
 		try {
-			jsonUser = java.net.URLDecoder.decode(jsonUser, "UTF-8");
 			Usuario user = mapper.readValue(jsonUser, Usuario.class);
 			service.salvar(user);
 			response.setStatus(JsonResponse.SUCCESS);
@@ -85,6 +84,12 @@ public class UsuarioController {
 		ModelAndView mv = new ModelAndView("user");
 		mv.addObject("user", service.buscarPorID(id));
 		return mv;
+	}
+	
+	@RequestMapping(value = "/deletar/{id}", method = RequestMethod.GET, produces = "application/json")
+	public String deletar(@PathVariable("id") Long id) throws Exception {
+		service.apagarUsuario(id);
+		return "ok";
 	}
 
 	@RequestMapping(value = "/UserByEmail", method = RequestMethod.GET, produces = "application/json")
