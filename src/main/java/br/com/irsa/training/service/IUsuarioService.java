@@ -18,4 +18,5 @@ public interface IUsuarioService {
 	public Usuario getUserbyLogin(String login, String senha);
 	public void apagarUsuario(Usuario usuario);
 	public void apagarUsuario(Long id);
+	public List<Usuario> listarTodos();
 }

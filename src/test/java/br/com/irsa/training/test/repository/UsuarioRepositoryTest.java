@@ -1,9 +1,10 @@
 package br.com.irsa.training.test.repository;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import javax.transaction.Transactional;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -16,7 +17,9 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.irsa.training.enums.StatusUser;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.repository.IUsuarioRepository;
 
@@ -36,11 +39,12 @@ public class UsuarioRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(true)
+	//@Rollback(true)
 	public void testFindByNome() {
 		Usuario usuario = new Usuario();
 		usuario.setNome("Igor");
-		usuario.setEmail("teste@teste.com");
+		usuario.setEmail("teste@teste.com5");
+		usuario.setStatus(StatusUser.ATIVO);
 		repository.save(usuario);
 		Usuario user2 = repository.findByNome("Igor");
 		assertNotNull("Não achou o usuario", user2);

@@ -39,19 +39,18 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public void salvar(Usuario user) throws RegraNegocioException, Exception {
-		if (user == null)
-			throw new Exception("sem usuario");
-		if(user.getId() != null)
-			userRepository.save(user);
-		
-		else if (user.getNome() != null && user.getEmail() != null){
+		//Verifica atributos obrigatórios
+		if (user == null || user.getNome() == null || user.getEmail() == null)
+			throw gerador.getRNException(RegrasNegocio.CadastroInvalido);
+		//Verifica se o email é repetido ou se é usuário diferente		
 			Usuario repetido = userRepository.findByEmail(user.getEmail());
-			if(repetido != null)
-				throw gerador.getRNException(RegrasNegocio.CadastroRepetido, user.getEmail());
+			if(!(repetido ==null || (user.getId() !=null && repetido.getId().equals(user.getId()) )))
+				throw gerador.getRNException(RegrasNegocio.UsuarioRepetido, user.getEmail());
+			
 			if(user.getStatus() ==null)
 				user.setStatus(StatusUser.ATIVO);
 			userRepository.save(user);
-		}
+		
 	}
 
 	public void setRepository(IUsuarioRepository repository) {
@@ -108,5 +107,11 @@ public class UsuarioService implements IUsuarioService {
 	}
 	public void apagarUsuario(Long id){
 		userRepository.delete(id);
+	}
+	
+	@Override
+	public List<Usuario> listarTodos() {
+		
+		return userRepository.findAll();
 	}
 }
