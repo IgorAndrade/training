@@ -19,7 +19,7 @@ import br.com.irsa.training.enums.Permissao;
 import br.com.irsa.training.model.Usuario;
 import br.com.irsa.training.service.IUsuarioService;
 
-@Component("Autenticador") @Profile("producao")
+@Component("Autenticador") // @Profile("producao")
 public class Autenticador implements AuthenticationProvider {
 
 	@Autowired
@@ -29,6 +29,10 @@ public class Autenticador implements AuthenticationProvider {
 	private ApplicationContext context;
 //	@Autowired
 //	private HttpSession session;
+	
+	public Autenticador() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public Authentication authenticate(Authentication authentication)
