@@ -57,13 +57,27 @@ public class UsuarioLogado implements Serializable {
 	public Map<Object, Set<Permissao>> getAllPermissoes() {
 		return allPermissoes;
 	}
+	public Set<Permissao> getAllPermissoes(Object obj) {
+		return allPermissoes.get(obj);
+	}
 
-	public boolean hasPermissao(String permissao) {
-		return this.allPermissoes.get(getUser()).contains(permissao);
+		
+	public boolean hasAllPermissao(Object obj, String... permissoes) {
+		for(String permissao : permissoes){
+			if(!this.allPermissoes.get(obj).contains(permissao)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
-	public boolean hasPermissao(Object obj, String permissao) {
-		return this.allPermissoes.get(obj).contains(permissao);
+	public boolean hasAnyPermissao(Object obj, String... permissoes) {
+		for(String permissao : permissoes){
+			if(this.allPermissoes.get(obj).contains(permissao)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void logOut() {
