@@ -13,8 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.irsa.training.model.TelefoneTipos;
 import br.com.irsa.training.model.Usuario;
+import br.com.irsa.training.regradenegocio.GeradorExcecoes;
 import br.com.irsa.training.regradenegocio.RegraNegocioException;
+import br.com.irsa.training.regradenegocio.RegrasNegocio;
 import br.com.irsa.training.repository.ILicencaRepository;
+import br.com.irsa.training.security.UsuarioLogado;
 import br.com.irsa.training.service.IUsuarioService;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -25,13 +28,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UsuarioController {
 	private final String userSalvo = "UserSalvo";
 	@Autowired
-	ILicencaRepository r;
+	UsuarioLogado logado;
 	@Autowired
 	private MessageSource msg;
 	@Autowired @Qualifier("ObjectMapperCustom")
 	ObjectMapper mapper;
 	@Autowired
 	private IUsuarioService service;
+	@Autowired
+	private GeradorExcecoes excecoes;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView novo() {
@@ -43,10 +48,12 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/novo", method = RequestMethod.GET, produces = "application/json")
-	public Usuario novoUser() {
+	public ModelAndView novoUser() {
+		ModelAndView mv = new ModelAndView("user/editUser");
 		Usuario usuario = new Usuario();
 		usuario.setNome("novo");
-		return usuario;
+		mv.addObject("user", usuario);
+		return mv;
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = "application/json;charset=UTF-8",consumes={"application/json;charset=UTF-8" ,"application/x-www-form-urlencoded;charset=UTF-8"})
@@ -54,6 +61,8 @@ public class UsuarioController {
 		JsonResponse response = new JsonResponse();
 		try {
 			Usuario user = mapper.readValue(jsonUser, Usuario.class);
+			if(user.getId() !=null && !logado.getUser().equals(user))
+				throw excecoes.getRNException(RegrasNegocio.AcessoNegado);
 			service.salvar(user);
 			response.setStatus(JsonResponse.SUCCESS);
 			String[] nomes = { user.getNome() };

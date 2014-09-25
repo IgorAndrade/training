@@ -33,7 +33,7 @@ public class UsuarioService implements IUsuarioService {
 	@Autowired
 	private ILoginRepository loginRepository;
 	@Autowired
-	private GeradorExcecoes gerador;
+	private GeradorExcecoes excecoes;
 	@Autowired
 	private List<IBuscadorUserPermissao> listBuscador;
 
@@ -41,11 +41,11 @@ public class UsuarioService implements IUsuarioService {
 	public void salvar(Usuario user) throws RegraNegocioException, Exception {
 		//Verifica atributos obrigatórios
 		if (user == null || user.getNome() == null || user.getEmail() == null)
-			throw gerador.getRNException(RegrasNegocio.CadastroInvalido);
+			throw excecoes.getRNException(RegrasNegocio.CadastroInvalido);
 		//Verifica se o email é repetido ou se é usuário diferente		
 			Usuario repetido = userRepository.findByEmail(user.getEmail());
 			if(!(repetido ==null || (user.getId() !=null && repetido.getId().equals(user.getId()) )))
-				throw gerador.getRNException(RegrasNegocio.UsuarioRepetido, user.getEmail());
+				throw excecoes.getRNException(RegrasNegocio.UsuarioRepetido, user.getEmail());
 			
 			if(user.getStatus() ==null)
 				user.setStatus(StatusUser.ATIVO);

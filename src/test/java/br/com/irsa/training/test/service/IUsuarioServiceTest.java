@@ -1,7 +1,6 @@
 package br.com.irsa.training.test.service;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
